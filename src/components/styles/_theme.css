@@ -1,0 +1,48 @@
+:root {
+  /* Color palette */
+  --accentColor: #7ab7ff;
+  --accentColor-2: #c2a4ff;
+  --backgroundColor: #05040b;
+  --panelBg: linear-gradient(135deg, rgba(7,10,22,0.95), rgba(10,16,30,0.98));
+
+  /* Layout tokens */
+  --cWidth: 100%;
+  --cMaxWidth: 1100px;
+  --vh: 100vh;
+
+  /* Card / surface tokens */
+  --card-radius: 1rem;
+  --card-border: 1px solid rgba(255,255,255,0.06);
+  --card-shadow: 0 12px 40px rgba(0,0,0,0.65);
+
+  /* Typography */
+  --text-color: #eae5ec;
+  --muted-text: rgba(234,229,236,0.75);
+
+  /* Motion */
+  --fast: 0.18s;
+  --base-ease: cubic-bezier(.2,.9,.2,1);
+
+  /* Accessibility */
+  --focus-ring: 3px solid rgba(122,183,255,0.35);
+}
+
+/* Global accessibility helpers */
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(122,183,255,0.08), var(--focus-ring);
+  border-radius: 6px;
+}
+
+/* Utility helpers (small set to start) */
+.card-like {
+  background: var(--panelBg);
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.u-center {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,76 @@
+/* GLOBAL CURSOR THEME */
+:root {
+  --cursor-size: 42px;
+  --cursor-color: #c2a4ff;
+  --cursor-glow: rgba(194, 164, 255, 0.65);
+}
+
+/* MAIN CUSTOM CURSOR */
+.cursor-main {
+  --size: var(--cursor-size);
+
+  position: fixed;
+  top: calc(var(--size) / -2);
+  left: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+
+  background: var(--cursor-color);
+  mix-blend-mode: difference;
+
+  box-shadow: 0 0 40px var(--cursor-glow),
+              0 0 80px rgba(0,0,0,0.3);
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    top 0.18s ease,
+    left 0.18s ease,
+    background 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+/* ICONS INSIDE CURSOR (IF YOU ADD ANY) */
+.cursor-icons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(0.85);
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* When cursor becomes an icon mode */
+.cursor-main.icon-active {
+  background: transparent;
+  border: 2px solid var(--cursor-color);
+  box-shadow: 0 0 25px var(--cursor-glow);
+}
+
+.cursor-main.icon-active .cursor-icons {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* DISABLED STATE */
+.cursor-disable {
+  --size: 0px;
+  opacity: 0 !important;
+  transform: scale(0.5);
+}
+
+/* DESKTOP-ONLY CURSOR (auto-disable on mobile) */
+@media (max-width: 600px) {
+  .cursor-main {
+    display: none;
+  }
+}

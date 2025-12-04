@@ -1,0 +1,195 @@
+@import "./_theme.css";
+
+/* ========================= */
+/* TECHSTACK SECTION         */
+/* ========================= */
+
+.techstack {
+  --tech-bg: radial-gradient(circle at 0% 0%, #0f1320 0, #04040a 55%);
+  --tech-accent: #7ab7ff;
+  --tech-border: rgba(122, 183, 255, 0.32);
+  --tech-surface: rgba(9, 11, 23, 0.96);
+
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+
+  background: var(--tech-bg);
+  color: #eae5ec;
+
+  padding: clamp(2.6rem, 6.5vw, 4.8rem) clamp(1.4rem, 6vw, 3.4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.6rem, 3vw, 2.4rem);
+  text-align: center;
+
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: techFadeIn 0.9s ease-out forwards;
+}
+
+/* soft glow background */
+.techstack::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(122, 183, 255, 0.14) 0, transparent 55%),
+    radial-gradient(circle at 90% 80%, rgba(122, 183, 255, 0.08) 0, transparent 55%);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+/* heading */
+.techstack h2 {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+/* optional subtitle slot */
+.techstack .subtitle {
+  max-width: 640px;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  opacity: 0.78;
+}
+
+/* main canvas / playground wrapper */
+.tech-canvas {
+  width: 100%;
+  max-width: 1100px;
+  height: clamp(100vh, 100vh, 100vh);
+
+  border-radius: 1.1rem;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, var(--tech-surface), #0a1021);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(122, 183, 255, 0.08);
+
+  position: relative;
+  isolation: isolate;
+
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease,
+    background 0.24s ease;
+}
+
+/* inner gradient ring / border glow */
+.tech-canvas::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid rgba(122, 183, 255, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+/* hover elevate (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .tech-canvas:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 80px rgba(0, 0, 0, 0.9);
+    border-color: var(--tech-border);
+    background: linear-gradient(135deg, #11172b, #0c1732);
+  }
+
+  .tech-canvas:hover::before {
+    opacity: 1;
+  }
+}
+
+/* If you have an inner layout inside canvas */
+.tech-canvas-inner {
+  width: 100%;
+  height: 100%;
+  padding: clamp(1.2rem, 3vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* small pill tags row (optional) */
+.tech-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+.tech-tag-pill {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 183, 255, 0.28);
+  background: rgba(9, 13, 25, 0.9);
+  opacity: 0.85;
+}
+
+/* entrance animation */
+@keyframes techFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================== */
+/* RESPONSIVE TWEAKS      */
+/* ====================== */
+
+@media (min-width: 900px) {
+  .techstack {
+    padding: clamp(3rem, 6vw, 5rem) clamp(2.4rem, 7vw, 4.8rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .techstack {
+    min-height: 80vh;
+  }
+
+  .tech-canvas {
+    height: 100vh;
+    border-radius: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .techstack {
+    align-items: flex-start;
+    text-align: left;
+    padding-inline: 1.4rem;
+  }
+
+  .tech-canvas {
+    height: 100vh;
+  }
+
+  .tech-tags-row {
+    justify-content: flex-start;
+  }
+}

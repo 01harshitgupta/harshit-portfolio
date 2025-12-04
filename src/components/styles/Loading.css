@@ -1,0 +1,514 @@
+/* ======================= */
+/* LOADING SCREEN THEME    */
+/* ======================= */
+
+.loading-screen {
+  --loader-bg: radial-gradient(circle at 0% 0%, #1b1630 0, #05030d 55%);
+  --loader-accent: #c2a4ff;
+  --loader-accent-soft: #a87cff;
+  --loader-text: #f5f1ff;
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: var(--vh);
+  background: var(--loader-bg);
+  z-index: 999999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  color: var(--loader-text);
+}
+
+/* Soft glass header pinned at top */
+.loading-header {
+  width: var(--cWidth);
+  max-width: var(--cMaxWidth);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999999999;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+
+  box-sizing: border-box;
+  color: var(--loader-text);
+  pointer-events: none;
+}
+
+.loader-title {
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Optional right-side small text/label in header */
+.loading-header span {
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  opacity: 0.6;
+}
+
+/* ======================= */
+/* MAIN LOADER WRAP        */
+/* ======================= */
+
+.loading-wrap {
+  --Lsize: 160px;
+
+  position: relative;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+
+  min-width: 0;
+  min-height: 0;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+  transition:
+    transform 0.8s ease-in-out,
+    box-shadow 0.6s ease-in-out,
+    border-radius 0.8s ease-in-out,
+    min-width 0.8s ease-in-out,
+    min-height 0.8s ease-in-out;
+  transition-delay: 0.15s;
+}
+
+/* Clicked → fullscreen morph */
+.loading-clicked {
+  transition-delay: 0ms;
+  transition-timing-function: cubic-bezier(0.33, 0.11, 1, 0.72);
+
+  transform: scale(1);
+  min-width: calc(100vw + 3000px);
+  min-height: calc(100vh + 300px);
+  border-radius: 4000px;
+  box-shadow: none;
+}
+
+/* ======================= */
+/* BUTTON + HOVER GLOW     */
+/* ======================= */
+
+.loading-button {
+  position: relative;
+  z-index: 9;
+
+  padding: 18px 44px;
+  border-radius: 999px;
+  background-color: #050507;
+  color: var(--loader-text);
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  overflow: hidden;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.loading-button::before {
+  content: "";
+  position: absolute;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  filter: blur(60px);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.35s ease;
+}
+
+.loading-button:hover {
+  background: #0b0715;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.loading-button:hover::before {
+  opacity: 1;
+}
+
+.loading-clicked .loading-button::before {
+  opacity: 0;
+}
+
+/* Big blurred blob following mouse inside wrap */
+.loading-hover {
+  position: absolute;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  width: 260px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--loader-accent-soft), transparent 70%);
+  filter: blur(30px);
+  transform: translate(-50%, -50%);
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.loading-wrap:hover .loading-hover {
+  opacity: 1;
+}
+
+.loading-clicked:hover .loading-hover,
+.loading-clicked .loading-hover {
+  opacity: 0;
+}
+
+/* ======================= */
+/* TEXT + ICON STATES      */
+/* ======================= */
+
+.loading-content {
+  position: relative;
+  background-color: #000;
+  width: 100%;
+  overflow: hidden;
+  text-transform: uppercase;
+  border-radius: inherit;
+  transition: 0.6s;
+}
+
+.loading-content-in {
+  position: relative;
+  width: var(--Lsize);
+  overflow: hidden;
+}
+
+/* "Loading..." + icon row */
+.loading-content2 {
+  position: relative;
+  width: var(--Lsize);
+  max-width: var(--Lsize);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  text-align: center;
+
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.loading-clicked .loading-content2 {
+  opacity: 0;
+  overflow: visible;
+}
+
+/* Right-side "progress" text, if any */
+.loading-content span {
+  font-weight: 300;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  opacity: 0.7;
+}
+
+/* Small blinking block */
+.loading-box {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  width: 15px;
+  height: 25px;
+  background-color: #ffffff;
+  transform: translate(100%, -50%);
+  animation: blink 1s linear infinite;
+}
+
+/* Icon that appears when complete */
+.loading-icon {
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition-delay: 0.4s;
+}
+
+.loading-complete .loading-icon {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* When clicked and starting to leave */
+.loading-clicked .loading-icon {
+  transition: 0.9s ease;
+  transition-delay: 0s;
+  transform: translateX(200px);
+}
+
+/* Slide text out on click */
+.loading-clicked .loading-content2 span {
+  transition: 0.7s ease;
+  transform: translateY(80px);
+  opacity: 0;
+}
+
+/* ======================= */
+/* PROGRESS BAR / CONTAINER SHRINK */
+/* ======================= */
+
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  width: 100%;
+  max-width: var(--Lsize);
+  transform: translateY(-50%);
+  z-index: 9;
+  transition: max-width 1s ease;
+}
+
+.loading-complete .loading-container {
+  max-width: 0;
+}
+
+/* ======================= */
+/* MARQUEE / BIG TITLE     */
+/* ======================= */
+
+.loading-marquee {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+
+  transform: translateY(-50%);
+  color: var(--backgroundColor);
+
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+}
+
+.loading-marquee span {
+  padding: 0 40px;
+  position: relative;
+}
+
+.loading-marquee span::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: var(--backgroundColor);
+  transform: translate(-50%, -50%);
+}
+
+/* ======================= */
+/* MINI GAME LINES         */
+/* ======================= */
+
+.loaderGame-container {
+  width: 180px;
+  height: 90px;
+  overflow: hidden;
+  position: relative;
+
+  transform: scale(0.45);
+  transform-origin: top right;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.loader-out .loaderGame-container {
+  opacity: 0;
+  transform: scale(0.35);
+}
+
+.loaderGame-in {
+  width: 1200px;
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  animation: loaderGame 7s linear infinite;
+  will-change: transform;
+}
+
+.loaderGame-line {
+  float: left;
+  margin: 0 20px;
+  margin-bottom: 40px;
+  position: relative;
+  width: 10px;
+  height: 60px;
+  background-color: #000;
+  display: block;
+}
+
+.loaderGame-line:nth-child(2n) {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.loaderGame-ball {
+  position: absolute;
+  left: 20%;
+  top: 0%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--loader-accent-soft);
+  animation: ball25 7s infinite;
+  animation-timing-function: cubic-bezier(0.3, 1.18, 0.63, 1.28);
+  transform: translateY(10px);
+}
+
+/* ======================= */
+/* ANIMATIONS              */
+/* ======================= */
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loading-complete .loading-box {
+  animation: blinkDone 0.3s forwards;
+  animation-delay: 1s;
+  opacity: 1;
+}
+
+@keyframes blinkDone {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes loaderGame {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-300px);
+  }
+}
+
+@keyframes ball25 {
+  0%,
+  90%,
+  100% {
+    transform: translateY(70px);
+  }
+  15%,
+  45%,
+  80% {
+    transform: translateY(10px);
+  }
+  30%,
+  67% {
+    transform: translateY(70px);
+  }
+}
+
+/* ======================= */
+/* RESPONSIVE TWEAKS       */
+/* ======================= */
+
+@media only screen and (min-width: 500px) {
+  .loading-header {
+    padding: 18px 0;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .loading-header {
+    padding: 28px 0;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .loading-wrap {
+    --Lsize: 210px;
+  }
+
+  .loading-button {
+    padding: 26px 66px;
+    font-size: 1.1rem;
+  }
+
+  .loading-container {
+    left: 70px;
+  }
+
+  .loading-marquee {
+    font-size: clamp(3rem, 8vw, 6rem);
+  }
+
+  .loaderGame-container {
+    transform: scale(0.5);
+  }
+}
+
+/* Very small screens – scale down game + text a bit */
+@media only screen and (max-width: 480px) {
+  .loaderGame-container {
+    transform: scale(0.32);
+  }
+
+  .loading-wrap {
+    --Lsize: 130px;
+  }
+
+  .loading-button {
+    padding: 14px 30px;
+    letter-spacing: 0.12em;
+  }
+
+  .loading-marquee {
+    font-size: clamp(1.4rem, 8vw, 2.2rem);
+  }
+}
