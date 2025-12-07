@@ -3,7 +3,7 @@ export const config = {
         name: "Harshit",
         fullName: "Harshit Gupta",
         title: "Full Stack Developer",
-        description: "Full-stack builder creating digital experiences that respect humans and scale with clarity. Accessibility is my north star."
+        description: "Full-stack builder optimizing distributed systems, deterministic UI behavior, and accessibility-compliant interfaces—all engineered for long-term scale."
     },
     social: {
         github: "01harshitgupta",
@@ -12,7 +12,7 @@ export const config = {
     },
     about: {
         title: "About Me",
-        description: "Full-stack builder creating digital experiences that respect humans and scale with clarity. I specialize in building modern web applications with React, Node.js."
+        description:"Full-stack builder optimizing distributed systems, deterministic UI behavior, and accessibility-compliant interfaces—all engineered for long-term scale."
     },
     experiences: [],
     projects: [
@@ -28,22 +28,34 @@ export const config = {
             title: "JUST-CONVERT",
             category: "Full Stack",
             technologies: "React,  Socket.io,Node.js, Express.js, MongoDB",
-            image: "/images/project-2.webp"
+            image: "/images/project-2.webp",
+            link:"https://pdf-converter-frontend-0kfh.onrender.com/"
+
         },
         {
             id: 3,
+            title: "RUSTEZE",
+            category: "Full Stack",
+            technologies: "React, Node.js, Express.js, MongoDB, JWT",
+            image: "/images/project-4.webp",
+            link:"https://rusteze-eta.vercel.app/"
+        },
+        {
+            id: 4,
+            title: "Statsmetric",
+            category: "Full Stack",
+            technologies: " express, React, Node.js,APIs",
+            image: "/images/project-3.webp",
+            link:"https://cheery-kheer-cfa7fb.netlify.app/",
+        },
+        {
+            id: 5,
             title: "CHATOR-BOT",
             category: "Full Stack",
             technologies: "socket.io, express, React, Node.js, MongoDB, JWT",
             image: "/images/project-3.webp"
         },
-        {
-            id: 4,
-            title: "RUSTEZE",
-            category: "Full Stack",
-            technologies: "React, Node.js, Express.js, MongoDB, JWT",
-            image: "/images/project-4.webp"
-        }
+        
      
     ],
     contact: {

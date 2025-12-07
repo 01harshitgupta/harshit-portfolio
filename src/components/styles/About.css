@@ -47,7 +47,7 @@
 .about-me h3 {
   font-size: 26px;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.3rem;
   font-weight: 500;
 
   /* Matrix green glow */
@@ -59,14 +59,14 @@
 /* Main paragraph text */
 .about-me p {
   margin-top: 20px;
-  font-size: 33px;
+  font-size: 25px;
   font-weight: 700;
   line-height: 38px;
-  letter-spacing: 1.3px;
+  letter-spacing: 0.2rem;
 
   color: #d4ffd4;
   text-shadow: 0 0 7px rgba(0, 255, 90, 0.4);
-  font-family: "Geist", monospace;
+  font-family:sans-serif,monospace ;
 
   /* Slight glow fade-in */
   opacity: 0;

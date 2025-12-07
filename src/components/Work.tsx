@@ -62,7 +62,18 @@ const Work = () => {
                   <h3>0{index + 1}</h3>
 
                   <div>
+                    <div className="work-title-in">
                     <h4>{project.title}</h4>
+                    {[2, 3, 4].includes(project.id) && (
+                    <a
+    href={project.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="live-link-btn"
+  >
+    Live 
+  </a>)}
+                    </div>
                     <p>{project.category}</p>
                   </div>
                 </div>

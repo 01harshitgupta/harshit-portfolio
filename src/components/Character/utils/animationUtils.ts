@@ -41,8 +41,8 @@ const setAnimations = (gltf: GLTF) => {
     introAction.reset().play();
     setTimeout(() => {
       const blink = gltf.animations.find((clip) => clip.name === "Blink");
-      mixer.clipAction(blink!).play().fadeIn(0.5);
-    }, 2500);
+      mixer.clipAction(blink!).play().fadeIn(0.3);
+    }, 1500);
   }
   function hover(gltf: GLTF, hoverDiv: HTMLDivElement) {
     let eyeBrowUpAction = createBoneAction(
