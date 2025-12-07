@@ -1,20 +1,64 @@
+/* ======================================== */
+/* MATRIX HACKER HOVER LINK ANIMATION       */
+/* ======================================== */
+
 .hover-link {
   position: relative;
-  display: flex;
-  text-wrap: nowrap;
+  display: inline-flex;
   overflow: hidden;
+  text-wrap: nowrap;
+  cursor: pointer;
+
+  --hack-green: #00ff88;
+  --hack-green-glow: rgba(0, 255, 140, 0.55);
+  --hack-dark: #0a0f0b;
 }
+
+/* base text */
 .hover-in {
   position: relative;
-  transition: 0.3s;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #a6ffda;
+  text-shadow: 
+    0 0 4px rgba(0,255,140,0.3),
+    0 0 8px rgba(0,255,120,0.15);
 }
+
+/* second layer that slides in */
 .hover-in div {
-  display: flex;
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
+  display: flex;
+
+  color: var(--hack-green);
+  text-shadow:
+    0 0 6px var(--hack-green-glow),
+    0 0 15px rgba(0,255,150,0.35);
 }
+
+/* === HOVER EFFECT === */
 .hover-link:hover .hover-in {
-  transform: translateY(-100%);
-  color: var(--accentColor);
+  transform: translateY(-110%);
+  color: var(--hack-green);
+
+  text-shadow:
+    0 0 10px var(--hack-green-glow),
+    0 0 20px rgba(0, 255, 120, 0.5),
+    0 0 40px rgba(0, 255, 120, 0.3);
+}
+
+/* ============================= */
+/* OPTIONAL: GLITCH ON HOVER     */
+/* Enable if you want stronger   */
+/* ============================= */
+
+.hover-link:hover .hover-in {
+  animation: hack-glitch 0.15s steps(2, end) 1;
+}
+
+@keyframes hack-glitch {
+  0% { transform: translateY(-110%) translateX(0); }
+  50% { transform: translateY(-110%) translateX(-1px); }
+  100% { transform: translateY(-110%) translateX(0); }
 }

@@ -184,7 +184,7 @@ const TechStack = () => {
       <Canvas
         shadows
         className="tech-canvas"
-        style={{ position: "relative", zIndex: 2 }}
+        style={{ position: "relative", zIndex: 2 ,height: "calc(100vh + 150px)",}}
         gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
         onCreated={(state) => {

@@ -1,195 +1,229 @@
-@import "./_theme.css";
-
 /* ========================= */
-/* TECHSTACK SECTION         */
+/* MATRIX HACKER TECHSTACK   */
 /* ========================= */
 
 .techstack {
-  --tech-bg: radial-gradient(circle at 0% 0%, #0f1320 0, #04040a 55%);
-  --tech-accent: #7ab7ff;
-  --tech-border: rgba(122, 183, 255, 0.32);
-  --tech-surface: rgba(9, 11, 23, 0.96);
+  --hack-green: #00ff88;
+  --hack-green-soft: rgba(0, 255, 120, 0.45);
+  --hack-dark: #030804;
+  --hack-bg: radial-gradient(circle at 50% 20%, #032010 0%, #000 65%);
+  --hack-border: rgba(0, 255, 120, 0.25);
 
   position: relative;
-  z-index: 1;
-
   width: 100%;
-  margin: 0 auto;
   min-height: 100vh;
+  margin: 0 auto;
 
-  background: var(--tech-bg);
-  color: #eae5ec;
+  background: var(--hack-bg);
+  color: #b8ffd9;
 
-  padding: clamp(2.6rem, 6.5vw, 4.8rem) clamp(1.4rem, 6vw, 3.4rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1.6rem, 3vw, 2.4rem);
-  text-align: center;
+
+  padding: clamp(2.8rem, 6vw, 4.5rem);
+  gap: clamp(1.5rem, 3vw, 2rem);
 
   overflow: hidden;
 
   opacity: 0;
-  transform: translateY(18px);
-  animation: techFadeIn 0.9s ease-out forwards;
+  transform: translateY(20px);
+  animation: techMatrixFade 0.9s ease-out forwards;
 }
 
-/* soft glow background */
+/* hologram glow */
 .techstack::before {
   content: "";
   position: absolute;
-  inset: -18%;
+  inset: -15%;
   background:
-    radial-gradient(circle at 10% 20%, rgba(122, 183, 255, 0.14) 0, transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(122, 183, 255, 0.08) 0, transparent 55%);
+    radial-gradient(circle at 20% 30%, rgba(0, 255, 120, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(0, 255, 150, 0.12) 0%, transparent 55%);
   pointer-events: none;
-  opacity: 0.9;
   z-index: -1;
 }
 
-/* heading */
+/* CRT scanlines */
+.techstack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ========================= */
+/* HEADING                   */
+/* ========================= */
+
 .techstack h2 {
-  font-size: clamp(2rem, 3.6vw, 3rem);
-  font-weight: 400;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
+  color: var(--hack-green);
   margin: 0;
+  text-shadow:
+    0 0 10px rgba(0, 255, 120, 0.6),
+    0 0 20px rgba(0, 255, 120, 0.4);
 }
 
-/* optional subtitle slot */
 .techstack .subtitle {
-  max-width: 640px;
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  opacity: 0.78;
+  max-width: 600px;
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  opacity: 0.75;
+  letter-spacing: 0.05em;
 }
 
-/* main canvas / playground wrapper */
+/* ========================= */
+/* 3D CANVAS CONTAINER       */
+/* ========================= */
+
 .tech-canvas {
   width: 100%;
-  max-width: 1100px;
-  height: clamp(100vh, 100vh, 100vh);
+  max-width: 1200px;
 
-  border-radius: 1.1rem;
+  /* FIXED: bigger height */
+  height: calc(100vh + 200px);
+  min-height: 550px;
+
+  border-radius: 1rem;
   overflow: hidden;
-
-  background: linear-gradient(135deg, var(--tech-surface), #0a1021);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.75),
-    0 0 0 1px rgba(122, 183, 255, 0.08);
-
   position: relative;
   isolation: isolate;
 
+  background: linear-gradient(135deg, #051308, #010704);
+  border: 1px solid rgba(0, 255, 120, 0.15);
+
+  box-shadow:
+    0 0 25px rgba(0, 255, 120, 0.25),
+    0 0 80px rgba(0, 255, 120, 0.08),
+    inset 0 0 40px rgba(0, 255, 120, 0.12);
+
+  transform: none;
   transition:
-    transform 0.24s ease,
-    box-shadow 0.24s ease,
-    border-color 0.24s ease,
-    background 0.24s ease;
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
 }
 
-/* inner gradient ring / border glow */
+/* glow ring */
 .tech-canvas::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
-  border: 1px solid rgba(122, 183, 255, 0.16);
+  border: 1px solid var(--hack-border);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.28s ease;
 }
 
-/* hover elevate (desktop only) */
+/* MATRIX RAIN */
+.tech-canvas::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  mix-blend-mode: screen;
+  opacity: 0.32;
+
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 255, 120, 0.18) 0px,
+      rgba(0, 255, 120, 0.18) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 50, 20, 0.6) 0px,
+      rgba(0, 50, 20, 0.6) 3px,
+      transparent 3px,
+      transparent 12px
+    );
+
+  background-size: 100% 40px, 40px 100%;
+  animation:
+    matrixRainFall 18s linear infinite,
+    matrixRainDrift 32s linear infinite;
+}
+
+/* hover glow */
 @media (hover: hover) and (pointer: fine) {
   .tech-canvas:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 26px 80px rgba(0, 0, 0, 0.9);
-    border-color: var(--tech-border);
-    background: linear-gradient(135deg, #11172b, #0c1732);
+    border-color: rgba(0, 255, 120, 0.45);
+    background: linear-gradient(135deg, #072516, #020d07);
+    box-shadow:
+      0 0 30px rgba(0, 255, 120, 0.45),
+      0 0 100px rgba(0, 255, 120, 0.18),
+      inset 0 0 45px rgba(0, 255, 120, 0.15);
   }
-
   .tech-canvas:hover::before {
     opacity: 1;
   }
 }
 
-/* If you have an inner layout inside canvas */
+/* ========================= */
+/* INNER AREA (BALLS SPACE)  */
+/* ========================= */
+
 .tech-canvas-inner {
   width: 100%;
-  height: 100%;
-  padding: clamp(1.2rem, 3vw, 2.8rem);
+  height: calc(100% + 150px); /* FIXED: more vertical area */
+  padding: clamp(1.8rem, 3vw, 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: visible;
+  position: relative;
 }
 
-/* small pill tags row (optional) */
+/* ========================= */
+/* TAGS                      */
+/* ========================= */
+
 .tech-tags-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.45rem;
   justify-content: center;
-  margin-top: 0.6rem;
 }
 
 .tech-tag-pill {
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   padding: 0.25rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(122, 183, 255, 0.28);
-  background: rgba(9, 13, 25, 0.9);
-  opacity: 0.85;
+  border: 1px solid rgba(0, 255, 120, 0.4);
+  background: rgba(0, 8, 4, 0.85);
+  color: #a8ffd6;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(0, 255, 120, 0.4);
 }
 
-/* entrance animation */
-@keyframes techFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* animations */
+@keyframes matrixRainFall {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 100%, 0 0; }
 }
 
-/* ====================== */
-/* RESPONSIVE TWEAKS      */
-/* ====================== */
-
-@media (min-width: 900px) {
-  .techstack {
-    padding: clamp(3rem, 6vw, 5rem) clamp(2.4rem, 7vw, 4.8rem);
-  }
+@keyframes matrixRainDrift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, 100% 0; }
 }
 
-@media (max-width: 900px) {
-  .techstack {
-    min-height: 80vh;
-  }
-
-  .tech-canvas {
-    height: 100vh;
-    border-radius: 0.9rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .techstack {
-    align-items: flex-start;
-    text-align: left;
-    padding-inline: 1.4rem;
-  }
-
-  .tech-canvas {
-    height: 100vh;
-  }
-
-  .tech-tags-row {
-    justify-content: flex-start;
-  }
+@keyframes techMatrixFade {
+  0% { opacity: 0; transform: translateY(22px); filter: blur(4px); }
+  60% { opacity: 1; filter: blur(0px); }
+  100% { opacity: 1; transform: translateY(0); }
 }

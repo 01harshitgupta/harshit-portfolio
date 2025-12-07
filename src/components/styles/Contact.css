@@ -1,17 +1,17 @@
-@import "./_theme.css";
-
-/* CONTACT SECTION – modern & responsive */
+/* ============================ */
+/* CONTACT – MATRIX HACKER THEME */
+/* ============================ */
 
 .contact-section {
   /* Local theme for this section */
-  --contact-bg: radial-gradient(circle at 0% 0%, #101424 0, #05040b 55%);
-  --contact-accent: #7ab7ff;
-  --contact-border: rgba(122, 183, 255, 0.35);
+  --contact-bg: radial-gradient(circle at 0% 0%, #030604 0, #010303 55%);
+  --contact-accent: #00ff6a;
+  --contact-border: rgba(0, 255, 120, 0.45);
 
   position: relative;
   z-index: 1;
   background: var(--contact-bg);
-  color: #eae5ec;
+  color: #e5ffe9;
 
   width: 100%;
   margin: 0 auto;
@@ -20,6 +20,8 @@
   display: flex;
   justify-content: center;
   min-height: 60vh;
+
+  overflow: hidden;
 }
 
 /* Inner container (center + width control) */
@@ -32,16 +34,32 @@
   gap: 2.5rem;
 }
 
-/* Soft glow background */
+/* Soft glow + scanlines background */
 .contact-section::before {
   content: "";
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(circle at 10% 20%, rgba(122, 183, 255, 0.16) 0, transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(122, 183, 255, 0.1) 0, transparent 55%);
+    radial-gradient(circle at 10% 20%, rgba(0, 255, 120, 0.18) 0, transparent 55%),
+    radial-gradient(circle at 90% 80%, rgba(0, 180, 80, 0.18) 0, transparent 55%);
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.8;
+  z-index: -2;
+}
+
+.contact-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 80, 0.06) 0px,
+    rgba(0, 255, 80, 0.06) 1px,
+    rgba(0, 0, 0, 0.08) 2px
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.6;
   z-index: -1;
 }
 
@@ -50,16 +68,23 @@
   font-size: clamp(2.3rem, 4vw, 3.5rem);
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin: 0;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.18em;
+  margin: 0 0 0.5rem 0;
+
+  color: #b8ffd1;
+  text-shadow:
+    0 0 10px rgba(0, 255, 120, 0.7),
+    0 0 30px rgba(0, 255, 120, 0.2);
+
+  animation: contactTitleFlicker 3.5s infinite;
 }
 
 /* Optional subtext under heading */
 .contact-intro {
   max-width: 520px;
   font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-  opacity: 0.75;
+  opacity: 0.78;
+  color: #aaf9c5;
 }
 
 /* Layout for left/right columns */
@@ -67,34 +92,39 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
 }
 
 /* Column title */
 .contact-flex h4 {
   font-weight: 500;
   margin: 0;
-  opacity: 0.7;
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
+  opacity: 0.8;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: #7cffb1;
 }
 
-/* Each block as a card */
+/* Each block as a hacker card */
 .contact-box {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
   padding: 1.4rem 1.6rem;
-  border-radius: 1.2rem;
-  background: linear-gradient(
-    135deg,
-    rgba(7, 10, 22, 0.95),
-    rgba(10, 16, 30, 0.98)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+
+  background: radial-gradient(circle at 0% 0%, rgba(0, 40, 12, 0.9), rgba(0, 0, 0, 0.96));
+  border: 1px solid rgba(0, 255, 120, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 120, 0.08),
+    0 18px 40px rgba(0, 0, 0, 0.9);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  position: relative;
+  overflow: hidden;
 
   transition:
     transform 0.22s ease,
@@ -103,17 +133,48 @@
     background 0.22s ease;
 }
 
+/* Subtle scan overlay on card */
+.contact-box::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 0% 0%, rgba(0, 255, 120, 0.12), transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Border glitch line */
+.contact-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 120, 0.9),
+    transparent
+  );
+  opacity: 0.3;
+  transform: translateX(-50%);
+}
+
 /* Hover effect on desktop */
 @media (hover: hover) and (pointer: fine) {
   .contact-box:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.85);
+    box-shadow:
+      0 26px 70px rgba(0, 0, 0, 1),
+      0 0 25px rgba(0, 255, 120, 0.4);
     border-color: var(--contact-border);
-    background: linear-gradient(
-      135deg,
-      rgba(11, 17, 32, 0.98),
-      rgba(13, 22, 42, 0.98)
-    );
+    background: radial-gradient(circle at 0% 0%, rgba(0, 60, 24, 0.96), rgba(0, 0, 0, 1));
+  }
+
+  .contact-box:hover::before {
+    opacity: 0.5;
   }
 }
 
@@ -121,30 +182,32 @@
   margin: 0.25rem 0 0.4rem 0;
   font-size: 0.98rem;
   opacity: 0.8;
+  color: #c7ffd7;
 }
 
 /* Social / email link */
 a.contact-social {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 500;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(0, 255, 120, 0.4);
 
   transition:
     color 0.2s ease,
     border-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
 a.contact-social::after {
-  content: "↗";
-  font-size: 0.9rem;
-  opacity: 0.7;
+  content: "▸";
+  font-size: 0.85rem;
+  opacity: 0.9;
   transform: translateY(1px);
 }
 
@@ -153,12 +216,14 @@ a.contact-social:hover {
   color: var(--contact-accent);
   border-color: var(--contact-accent);
   transform: translateY(-1px);
+  text-shadow: 0 0 12px rgba(0, 255, 120, 0.8);
 }
 
 .contact-box h2 {
   font-weight: 400;
   font-size: 1.1rem;
   margin: 0;
+  color: #e8ffef;
 }
 
 .contact-box h2 > span {
@@ -172,8 +237,20 @@ a.contact-social:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  opacity: 0.6;
+  opacity: 0.7;
   margin: 0;
+  color: #9af7b9;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes contactTitleFlicker {
+  0%, 100% { opacity: 1; }
+  40% { opacity: 0.92; }
+  45% { opacity: 0.75; }
+  50% { opacity: 0.98; }
+  55% { opacity: 0.7; }
+  60% { opacity: 1; }
 }
 
 /* ---------- RESPONSIVE BREAKPOINTS ---------- */

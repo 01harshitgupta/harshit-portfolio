@@ -1,103 +1,226 @@
+/* ==================================== */
+/*  MATRIX HACKER – SOCIAL + RESUME    */
+/* ==================================== */
+
 .icons-section {
   position: fixed;
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   bottom: 0;
-  z-index: 99;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 99;
+  pointer-events: none; /* children enable their own */
 }
+
+/* ========================= */
+/*  LEFT HACKER SOCIAL BAR   */
+/* ========================= */
+
 .social-icons {
   position: absolute;
   left: -20px;
   bottom: 20px;
-  display: none;
+
+  display: none; /* enabled on desktop via media query */
   flex-direction: column;
-  gap: 8px;
-  z-index: 999;
+  gap: 10px;
+
   padding: 10px;
+  z-index: 999;
+
+  pointer-events: auto;
 }
-.social-icons:hover {
-  transition: 0.3s;
-  color: var(--backgroundColor);
+
+/* Vertical faint line behind icons */
+.social-icons::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -30px;
+  width: 2px;
+  height: calc(100% + 50px);
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 255, 120, 0) 0%,
+    rgba(0, 255, 120, 0.5) 40%,
+    rgba(0, 255, 120, 0.1) 100%
+  );
+  transform: translateX(-50%);
+  pointer-events: none;
 }
-.social-icons a:hover {
-  color: var(--backgroundColor);
-  /* transform: scale(1.2); */
-}
+
+/* Icon container (circular pad) */
 .social-icons span {
   width: 50px;
   height: 50px;
+
   position: relative;
   display: flex;
+
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(0, 255, 120, 0.12), transparent 70%);
+  box-shadow:
+    0 0 12px rgba(0, 255, 100, 0.35),
+    inset 0 0 10px rgba(0, 0, 0, 0.9);
+
+  transition:
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
+
+/* Inner <a> positioned in center */
 .social-icons a {
   --siLeft: 50%;
   --siTop: 50%;
   position: absolute;
+
   left: var(--siLeft, 50%);
   top: var(--siTop, 50%);
   transform: translate(-50%, -50%);
+
   display: flex;
-  font-size: 23px;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+  color: #aaffc9;
+
   will-change: left, top;
-  transition: transform 0.3s ease-out;
+  transition:
+    transform 0.2s ease-out,
+    color 0.2s ease-out,
+    text-shadow 0.2s ease-out;
 }
+
+/* Hover: glow + slight lift */
+.social-icons span:hover {
+  transform: translateY(-2px);
+  background: radial-gradient(circle, rgba(0, 255, 140, 0.18), transparent 70%);
+  box-shadow:
+    0 0 18px rgba(0, 255, 140, 0.6),
+    0 0 40px rgba(0, 0, 0, 0.9);
+}
+
+.social-icons a:hover {
+  color: #e9fff0;
+  transform: translate(-50%, -50%) scale(1.05);
+  text-shadow:
+    0 0 10px rgba(0, 255, 140, 0.9),
+    0 0 20px rgba(0, 255, 120, 0.5);
+}
+
+/* Remove old “change color on hover whole container” */
+.social-icons:hover {
+  color: inherit;
+  transition: none;
+}
+
+/* ========================= */
+/*  RIGHT RESUME LABEL       */
+/* ========================= */
+
 .resume-button {
   position: absolute;
-  z-index: 99;
-  display: flex;
-  gap: 5px;
-  bottom: 40px;
   right: 0;
-  width: auto;
+  bottom: 40px;
+
+  z-index: 99;
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   text-wrap: nowrap;
-  letter-spacing: 4px;
+  letter-spacing: 0.32em;
   font-size: 15px;
   line-height: 15px;
   font-weight: 600;
-  color: #5e5e5e;
+
+  color: #39ff94;
   cursor: pointer;
-  transition: 0.5s;
+
   transform-origin: left bottom;
   transform: translateX(100%) rotateZ(-90deg);
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease,
+    transform 0.25s ease;
 }
-.resume-button:hover {
-  color: #fff;
-}
+
+/* Icon inside resume button */
 div.resume-button span {
-  color: #fff;
+  color: #e7ffee;
   font-size: 17px;
-  margin-top: -1px;
   display: flex;
   align-items: center;
+  margin-top: -1px;
 }
+
+/* Hover: stronger neon */
+.resume-button:hover {
+  color: #e9fff0;
+  text-shadow:
+    0 0 10px rgba(0, 255, 140, 0.9),
+    0 0 24px rgba(0, 255, 120, 0.6);
+}
+
+/* Optional micro-move on hover */
+/* .resume-button:hover {
+  transform: translateX(100%) rotateZ(-90deg) translateY(-1px);
+} */
+
+/* ========================= */
+/*  CHECK-LINE (if you need) */
+/* ========================= */
+
 .check-line {
   position: fixed;
   top: 655px;
   left: 0;
-  height: 1px;
-  background-color: #ffffff;
   width: 100%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 120, 0.4),
+    transparent
+  );
+  opacity: 0.35;
   z-index: 99999;
 }
+
+/* ========================= */
+/*      BREAKPOINTS          */
+/* ========================= */
+
 @media only screen and (min-width: 900px) {
   .social-icons {
     display: flex;
-    gap: 20px;
+    gap: 18px;
   }
+
   .social-icons a {
-    font-size: 28px;
+    font-size: 26px;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .resume-button {
     transform: none;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 18px;
   }
+
   div.resume-button span {
-    font-size: 23px;
+    font-size: 22px;
     margin-top: -1.5px;
   }
 }
